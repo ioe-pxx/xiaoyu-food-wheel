@@ -40,6 +40,29 @@ async function run() {
     assert.equal(await page.locator("#candidateCount").textContent(), "8");
     await page.screenshot({ path: path.join(outputDir, "iphone-portrait.png"), fullPage: true });
 
+    await page.locator("#appearanceButton").click();
+    await page.locator("#appearanceName").fill("小语食堂");
+    await page.locator("#backgroundFile").setInputFiles({
+      name: "background.png",
+      mimeType: "image/png",
+      buffer: Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScL8yAAAAABJRU5ErkJggg==", "base64")
+    });
+    await page.waitForFunction(() => document.body.classList.contains("has-custom-background"));
+    await page.locator(".save-appearance-button").click();
+    assert.equal(await page.locator("#workspaceName").textContent(), "小语食堂");
+    assert.equal(await page.title(), "小语食堂");
+    await page.locator("#closeAppearanceButton").click();
+    await page.reload({ waitUntil: "networkidle" });
+    assert.equal(await page.locator("#workspaceName").textContent(), "小语食堂");
+    assert.equal(await page.title(), "小语食堂");
+    assert.equal(await page.locator("body").evaluate((body) => body.classList.contains("has-custom-background")), true);
+
+    await page.locator("#appearanceButton").click();
+    await page.locator("#resetBackgroundButton").click();
+    await page.locator(".save-appearance-button").click();
+    assert.equal(await page.locator("body").evaluate((body) => body.classList.contains("has-custom-background")), false);
+    await page.locator("#closeAppearanceButton").click();
+
     await page.locator("#candidateButton").click();
     await page.locator("#entryInput").fill("小笼包");
     await page.locator("#addButton").click();

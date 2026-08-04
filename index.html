@@ -18,11 +18,16 @@
     <header class="topbar">
       <div class="brand-copy">
         <p>今日份好好吃饭</p>
-        <h1>小语今天吃什么</h1>
+        <h1 id="workspaceName">小语今天吃什么</h1>
       </div>
-      <button id="manageButton" class="icon-button" type="button" aria-label="管理候选" title="管理候选">
-        <i data-lucide="list-plus" aria-hidden="true"></i>
-      </button>
+      <div class="topbar-actions">
+        <button id="appearanceButton" class="icon-button" type="button" aria-label="外观设置" title="外观设置">
+          <i data-lucide="settings-2" aria-hidden="true"></i>
+        </button>
+        <button id="manageButton" class="icon-button" type="button" aria-label="管理候选" title="管理候选">
+          <i data-lucide="list-plus" aria-hidden="true"></i>
+        </button>
+      </div>
     </header>
 
     <section class="wheel-stage" aria-label="吃饭轮盘">
@@ -77,6 +82,31 @@
         <span id="toastMessage"></span>
         <button id="undoButton" type="button" hidden>撤销</button>
       </div>
+    </section>
+  </dialog>
+
+  <dialog id="appearanceDialog" class="sheet-dialog appearance-dialog">
+    <section class="sheet-content appearance-content" aria-labelledby="appearanceTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <header class="sheet-header">
+        <div>
+          <p>我的轮盘</p>
+          <h2 id="appearanceTitle">外观设置</h2>
+        </div>
+        <button id="closeAppearanceButton" class="icon-button" type="button" aria-label="关闭">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </header>
+      <form id="appearanceForm" class="appearance-form">
+        <label class="appearance-field" for="appearanceName"><span>轮盘名称</span><input id="appearanceName" type="text" maxlength="24" autocomplete="off" required></label>
+        <div class="appearance-field">
+          <span>背景图</span>
+          <div class="background-picker"><label for="backgroundFile" class="file-button"><i data-lucide="image-plus" aria-hidden="true"></i><span>选择图片</span></label><span id="backgroundFileName" class="background-file-name">使用默认背景</span></div>
+          <input id="backgroundFile" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" hidden>
+        </div>
+        <p id="appearanceMessage" class="appearance-message" role="status" aria-live="polite"></p>
+        <div class="appearance-actions"><button id="resetNameButton" type="button">恢复默认名称</button><button id="resetBackgroundButton" type="button">恢复默认背景</button><button class="save-appearance-button" type="submit">保存外观</button></div>
+      </form>
     </section>
   </dialog>
 

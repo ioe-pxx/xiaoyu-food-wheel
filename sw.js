@@ -1,4 +1,4 @@
-const CACHE_NAME = "xiaoyu-food-wheel-v1";
+const CACHE_NAME = "xiaoyu-food-wheel-v2";
 const CORE_ASSETS = [
   "./",
   "index.html",

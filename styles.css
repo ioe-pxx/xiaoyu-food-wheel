@@ -21,7 +21,7 @@ body {
   overflow-x: hidden;
   color: var(--ink);
   background-color: var(--sky);
-  background-image: linear-gradient(rgba(232, 247, 255, .3), rgba(232, 247, 255, .3)), url("assets/food-sky-bg.webp");
+  background-image: linear-gradient(rgba(232, 247, 255, .3), rgba(232, 247, 255, .3)), var(--wheel-background, url("assets/food-sky-bg.webp"));
   background-position: center top;
   background-size: cover;
   background-attachment: fixed;
@@ -48,6 +48,7 @@ svg { width: 22px; height: 22px; }
 }
 
 .topbar { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.topbar-actions { display: flex; align-items: center; gap: 9px; }
 .brand-copy p { margin: 0 0 4px; color: var(--blue-dark); font-size: 12px; font-weight: 750; }
 .brand-copy h1 { margin: 0; font-size: clamp(23px, 7vw, 31px); line-height: 1.15; font-weight: 850; }
 .icon-button {
@@ -144,6 +145,21 @@ dialog::backdrop { background: rgba(50, 83, 103, .32); backdrop-filter: blur(3px
 .entry-list button svg { width: 19px; height: 19px; }
 .entry-list .empty-list { min-height: 150px; display: flex; flex-direction: column; justify-content: center; gap: 9px; color: var(--muted); border: 0; }
 
+.appearance-dialog { max-height: min(76dvh, 620px); }
+.appearance-content { display: block; max-height: min(76dvh, 620px); overflow: auto; }
+.appearance-form { padding: 2px 18px 18px; }
+.appearance-field { display: grid; gap: 7px; margin-top: 15px; color: var(--muted); font-size: 12px; font-weight: 750; }
+.appearance-field input[type="text"] { width: 100%; height: 50px; border: 1px solid #b8d8e9; border-radius: 7px; color: var(--ink); background: white; padding: 0 15px; font-size: 16px; }
+.background-picker { min-height: 50px; display: flex; align-items: center; gap: 11px; }
+.file-button { flex: 0 0 auto; min-height: 42px; padding: 0 13px; border: 1px solid #b8d8e9; border-radius: 7px; color: var(--blue-dark); background: white; display: inline-flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; }
+.file-button svg { width: 18px; height: 18px; }
+.background-file-name { min-width: 0; color: var(--muted); font-size: 12px; font-weight: 500; overflow-wrap: anywhere; }
+.appearance-message { min-height: 20px; margin: 10px 0 0; color: #54829a; font-size: 12px; line-height: 1.45; }
+.appearance-message.error { color: #bd567b; }
+.appearance-actions { margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.appearance-actions button { min-height: 42px; border: 1px solid #b8d8e9; border-radius: 7px; color: var(--blue-dark); background: white; padding: 0 13px; font-weight: 800; cursor: pointer; }
+.appearance-actions .save-appearance-button { border-color: var(--blue); color: white; background: var(--blue); }
+
 .result-dialog { width: min(calc(100% - 34px), 390px); margin: auto; padding: 0; border: 0; border-radius: 8px; background: #f3fbff; box-shadow: 0 22px 55px rgba(47, 93, 121, .25); }
 .result-content { position: relative; min-height: 320px; padding: 40px 28px 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .result-close { position: absolute; top: 13px; right: 13px; width: 40px; height: 40px; box-shadow: none; }
@@ -170,7 +186,8 @@ dialog::backdrop { background: rgba(50, 83, 103, .32); backdrop-filter: blur(3px
 @media (orientation: landscape) and (max-height: 540px) {
   .app-shell { width: 100%; max-width: 920px; padding: calc(var(--safe-top) + 8px) max(18px, env(safe-area-inset-left)) calc(var(--safe-bottom) + 8px) max(18px, env(safe-area-inset-right)); grid-template-columns: 260px 1fr; grid-template-rows: 1fr; align-items: center; gap: 20px; }
   .topbar { align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; }
-  .topbar .icon-button { margin-top: 12px; }
+  .topbar-actions { margin-top: 12px; }
+  .topbar .icon-button { margin-top: 0; }
   .wheel-stage { height: 100%; padding: 0; flex-direction: row; gap: 18px; }
   .wheel-frame { width: min(62dvh, 360px); }
   .action-bar { width: 150px; grid-template-columns: 1fr; }
@@ -178,6 +195,14 @@ dialog::backdrop { background: rgba(50, 83, 103, .32); backdrop-filter: blur(3px
 
 @media (min-width: 800px) {
   .app-shell { padding-left: 28px; padding-right: 28px; }
+}
+
+@media (max-width: 380px) {
+  .topbar { gap: 10px; }
+  .topbar-actions { gap: 6px; }
+  .icon-button { width: 40px; height: 40px; }
+  .brand-copy h1 { font-size: 22px; }
+  .appearance-actions button { flex: 1 1 120px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
